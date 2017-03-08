@@ -12,6 +12,7 @@ function testPermAloneSimple(permAloneFunc) {
 function tests() {
   var result = "";
   var testsSpan = document.getElementById('tests');
-  result += "permAlonePattern simple : " + testPermAloneSimple(permAlonePattern).toString();
+  result += "permAlonePattern simple : " + testPermAloneSimple(permAlonePattern).toString() + "</br>";
+  result += "permAloneBruteForce simple : " + testPermAloneSimple(permAloneBruteForce).toString() + "</br>";
   testsSpan.innerHTML = result;
 }
