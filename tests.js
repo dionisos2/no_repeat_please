@@ -14,5 +14,7 @@ function tests() {
   var testsSpan = document.getElementById('tests');
   result += "permAlonePattern simple : " + testPermAloneSimple(permAlonePattern).toString() + "</br>";
   result += "permAloneBruteForce simple : " + testPermAloneSimple(permAloneBruteForce).toString() + "</br>";
+  result += "permAloneBruteForce2 simple : " + testPermAloneSimple(permAloneBruteForce2).toString() + "</br>";
+  result += "permAloneBruteForceOpti simple : " + testPermAloneSimple(permAloneBruteForceOpti).toString() + "</br>";
   testsSpan.innerHTML = result;
 }
