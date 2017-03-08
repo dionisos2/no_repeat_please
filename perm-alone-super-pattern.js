@@ -1,5 +1,15 @@
-function SuperPattern(pattern) {
+function SuperPattern(pattern, size) {
   this.pattern = pattern;
+  this.size = size;
+
+  this.number = function () {
+    var str = "";
+    if (this.size >= this.pattern.length*2+1) {
+      str += "p("+this.pattern.length+","+this.size+")";
+    } else {
+      return "0";
+    }
+  };
 
   this.nextPattern = function () {
     var i = 0;
