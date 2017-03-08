@@ -1,6 +1,6 @@
 
 window.onload = function () {
-  tests();
-  benchmarks();
+  // tests();
+  // benchmarks();
   createPermTab();
 };
