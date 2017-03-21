@@ -12,9 +12,18 @@ function testPermAloneSimple(permAloneFunc) {
 function tests() {
   var result = "";
   var testsSpan = document.getElementById('tests');
-  result += "permAlonePattern simple : " + testPermAloneSimple(permAlonePattern).toString() + "</br>";
-  result += "permAloneBruteForce simple : " + testPermAloneSimple(permAloneBruteForce).toString() + "</br>";
-  result += "permAloneBruteForce2 simple : " + testPermAloneSimple(permAloneBruteForce2).toString() + "</br>";
-  result += "permAloneBruteForceOpti simple : " + testPermAloneSimple(permAloneBruteForceOpti).toString() + "</br>";
+  var permAlone;
+
+  permAlone = permAlonePattern();
+  result += "permAlonePattern simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
+  permAlone = permAloneBruteForce();
+  result += "permAloneBruteForce simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
+  permAlone = permAloneBruteForce2();
+  result += "permAloneBruteForce2 simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
+  permAlone = permAloneBruteForceOpti();
+  result += "permAloneBruteForceOpti simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
+  permAlone = permAloneSuperPattern();
+  result += "permAloneSuperPattern simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
+
   testsSpan.innerHTML = result;
 }

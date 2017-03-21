@@ -53,5 +53,6 @@ function allDiff(str, num) {
 
 function p(nba,nbt) {
   var nbx = nbt - nba;
-  return permAlonePattern(mul('a',nba)+allDiff('b',nbx));
+  var permAlone = permAlonePattern();
+  return permAlone(mul('a',nba)+allDiff('b',nbx));
 }
