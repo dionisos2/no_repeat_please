@@ -34,18 +34,23 @@ function permAloneSuperPattern () {
       // a^5xaxx = p(2,5) = 72
       var str = "";
       if (this.gaNumber() <= (this.xNumber() + 1)) {
-        str += "p("+this.gaNumber().toString() + "," + this.gNumber().toString() + ") = " + p(this.gaNumber(), this.gNumber()).toString();
-        var placement = p(this.gaNumber(), this.gNumber());
+        var numberOfPlacements = p(this.gaNumber(), this.gNumber());
+        // str += "p("+this.gaNumber().toString() + "," + this.gNumber().toString() + ") = " + numberOfPlacements.toString();
         var byPlacement = 1;
         var aToChooseFrom = this.aNumber();
         for (var i=0; i<this.pattern.length; i++) {
           byPlacement *= binomial(aToChooseFrom, this.pattern[i]) * factorial(this.pattern[i]);
           aToChooseFrom -= this.pattern[i];
         }
-        var totalNumber = placement*byPlacement/factorial(this.pattern.length);
 
-        console.log(totalNumber.toString());
-        return str;
+        var groupedPattern = this.getGroupedPattern();
+        // byPlacement *= factorial(this.pattern.length);
+        for(i=0; i<groupedPattern.length;i++) {
+          byPlacement/=factorial(groupedPattern[i]);
+        }
+        var totalNumber = numberOfPlacements*byPlacement;
+
+        return totalNumber;
       } else {
         return "0";
       }
@@ -67,16 +72,24 @@ function permAloneSuperPattern () {
       return this.pattern.length;
     };
 
-    this.gaDiffNumber = function() {
-      var count = 0;
-      var current = 0;
-      for(var i=0;i<this.pattern.length;i++) {
-        if (current != this.pattern[i]) {
-          count++;
+    this.getGroupedPattern = function() {
+      // [5,5,4,4,2,2,2] → [2,2,3]
+      var i, current;
+      var groupedPattern = [];
+      if(this.pattern.length > 0) {
+        current = this.pattern[0];
+        groupedPattern.push(1);
+      }
+
+      for(i=1; i < this.pattern.length; i++) {
+        if(this.pattern[i] === current) {
+          groupedPattern[groupedPattern.length -1]++;
+        } else {
           current = this.pattern[i];
+          groupedPattern.push(1);
         }
       }
-      return count;
+      return groupedPattern;
     };
 
     this.gNumber = function () {
