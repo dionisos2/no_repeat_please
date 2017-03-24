@@ -56,3 +56,44 @@ function p(nba,nbt) {
   var permAlone = permAlonePattern();
   return permAlone(mul('a',nba)+allDiff('b',nbx));
 }
+
+
+function perm(arr, start, stop, perms) {
+	var i;
+	var newPerm = [];
+
+	// helper to swap array elements to the first position
+	var swap = function(arr, start, i) {
+	  var temp = arr[start];
+	  arr[start] = arr[i];
+	  arr[i] = temp;
+	  return arr;
+	};
+
+	// if we got to the end, this is a new permutation
+	if (start === stop) {
+	  for (i = 0; i< arr.length; i++) {
+	    newPerm.push(arr[i]);
+	  }
+	  perms.push(newPerm.join(''));
+	  // else, swap the next letter into the first spot
+	} else {
+	  for (i = start; i < stop; i++) {
+	    arr = swap(arr, start, i);
+	    perm(arr, start+1, stop, perms);
+	    arr = swap(arr, start, i);
+	  }
+	}
+}
+
+function permRegexp(str, regexp) {
+	var perms = [];
+	var arr = str.split('');
+
+	perm(arr, 0, arr.length, perms);
+
+	return perms.filter(function(perm) {
+	  return perm.match(regexp);
+	}).length;
+}
+
