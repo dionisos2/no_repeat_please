@@ -85,22 +85,25 @@ function permAloneSuperPattern () {
     };
 
     this.nextPattern = function () {
-      var i = 0;
+      var i = 0, i2 = 0;
       var newPattern = [];
       var aNumber = 0;
+      var max = 0;
 
       for (i = this.pattern.length - 1; i >= 0; i--) {
         if (this.pattern[i] >= 2 ) {
-          if (this.pattern[i] === 2) {
-            if(i === 0) {
-              return null;
-            }
-            newPattern = this.pattern.slice(0, i).concat([this.pattern[i]-1]).concat(this.pattern.slice(i+1)).concat([1]);
+          if ((this.pattern[i] === 2)&&(i === 0)) {
+            return null;
           } else {
-            if(1 + aNumber < this.pattern[i]) {
-              newPattern = this.pattern.slice(0, i).concat([this.pattern[i]-1]).concat([1 + aNumber]);
-            } else {
-              newPattern = this.pattern.slice(0, i).concat([this.pattern[i]-1]).concat(this.pattern[i]-1).concat(this.pattern.slice(i-1+this.pattern[i]));
+            max = this.pattern[i]-1;
+            newPattern = this.pattern.slice(0, i).concat([this.pattern[i]-1]);
+            aNumber++;
+            for(i2 = max; i2 <= aNumber; i2+=max) {
+              newPattern.push(max);
+            }
+            i2-=max;
+            if(i2 != aNumber) {
+              newPattern.push(aNumber-i2);
             }
           }
           return new SuperPattern(newPattern, this.size);
@@ -119,7 +122,7 @@ function permAloneSuperPattern () {
       console.log(superPattern.pattern.toString() + ":" + superPattern.number());
       superPattern = superPattern.nextPattern();
     }
-    // for(var i=0; i<4; i++) {
+    // for(var i=0; i<10; i++) {
     //   console.log(superPattern.pattern.toString());
     //   superPattern = superPattern.nextPattern();
     // }
