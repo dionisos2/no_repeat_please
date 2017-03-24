@@ -8,6 +8,17 @@ function benchmarkPermAloneSimple (permAloneFunc) {
 	return duration;
 }
 
+
+function benchmarkPermAloneOneGroup (permAloneFunc) {
+  var start = performance.now();
+
+  for (var i = 0; i < 10; i++) {
+    permAloneFunc("aaaaaaaaabcdefghijklmnopq");
+  }
+  var duration = performance.now() - start;
+	return duration;
+}
+
 function benchmarks () {
   var result = "";
   var benchmarksSpan = document.getElementById('benchmarks');
@@ -20,8 +31,12 @@ function benchmarks () {
   result += "benchmark permAloneBruteForce2 simple : " + parseFloat(benchmarkPermAloneSimple(permAlone)).toFixed(2) + "</br>";
   permAlone = permAloneBruteForceOpti();
   result += "benchmark permAloneBruteForceOpti simple : " + parseFloat(benchmarkPermAloneSimple(permAlone)).toFixed(2) + "</br>";
+
+  result += "<br/>";
+  permAlone = permAlonePattern();
+  result += "benchmark permAlonePattern simple : " + parseFloat(benchmarkPermAloneOneGroup(permAlone)).toFixed(2) + "</br>";
   permAlone = permAloneSuperPattern();
-  result += "benchmark permAloneSuperPattern simple : " + parseFloat(benchmarkPermAloneSimple(permAlone)).toFixed(2) + "</br>";
+  result += "benchmark permAloneSuperPattern simple : " + parseFloat(benchmarkPermAloneOneGroup(permAlone)).toFixed(2) + "</br>";
 
   benchmarksSpan.innerHTML = result;
 }

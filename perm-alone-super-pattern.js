@@ -12,20 +12,6 @@ function permAloneSuperPattern () {
     return Math.round(factorial(n)/common);
   }
 
-  function p(a,x) {
-    var tabP = {};
-    tabP[1] = {};
-    tabP[1][4] = 24;
-    tabP[2] = {};
-    tabP[2][5] = 72;
-    tabP[3] = {};
-    tabP[3][6] = 144;
-    tabP[4] = {};
-    tabP[4][7] = 144;
-
-    return tabP[a][x];
-  }
-
   function SuperPattern(pattern, size) {
     this.pattern = pattern;//a^5xaxx = [5,1]
     this.size = size;// a^6xxx=9
@@ -34,7 +20,7 @@ function permAloneSuperPattern () {
       // a^5xaxx = p(2,5) = 72
       var str = "";
       if (this.gaNumber() <= (this.xNumber() + 1)) {
-        var numberOfPlacements = p(this.gaNumber(), this.gNumber());
+        var numberOfPlacements = permWithoutRepeats(this.gaNumber(), this.gNumber());
         // str += "p("+this.gaNumber().toString() + "," + this.gNumber().toString() + ") = " + numberOfPlacements.toString();
         var byPlacement = 1;
         var aToChooseFrom = this.aNumber();
@@ -128,17 +114,56 @@ function permAloneSuperPattern () {
     };
   }
 
-  function permAlone(str) {
-    superPattern = new SuperPattern([6],9);
+  function permWithoutRepeats(aNumber, totalNumber) {
+    if (aNumber === 1) {
+      return factorial(totalNumber);
+    } else {
+      return factorial(totalNumber) - permWithRepeats(aNumber, totalNumber);
+    }
+  }
 
+  function permWithRepeats(aNumber, totalNumber) {
+    var startPattern = [];
+    startPattern.push(aNumber);
+    var superPattern = new SuperPattern(startPattern, totalNumber);
+    var sum = 0;
     while (superPattern !== null) {
-      console.log(superPattern.pattern.toString() + ":" + superPattern.number());
+      sum += superPattern.number();
       superPattern = superPattern.nextPattern();
     }
-    // for(var i=0; i<10; i++) {
-    //   console.log(superPattern.pattern.toString());
-    //   superPattern = superPattern.nextPattern();
-    // }
+
+    return sum;
+  }
+
+  function getReps(str) {
+    var sortedLetters = str.split("").sort();
+    var reps = [];
+    var currentLetter, numberOfLetters;
+
+    if(str.length >= 1) {
+      currentLetter = sortedLetters[0];
+      numberOfLetters = 1;
+    }
+    for(var i = 1; i < sortedLetters.length; i++) {
+      if(sortedLetters[i] === currentLetter) {
+        numberOfLetters++;
+      } else {
+        if (numberOfLetters > 1) {
+          reps.push(numberOfLetters);
+        }
+        currentLetter = sortedLetters[i];
+        numberOfLetters = 1;
+      }
+    }
+    if(numberOfLetters > 1) {
+      reps.push(numberOfLetters);
+    }
+    return reps;
+  }
+  function permAlone(str) {
+    var reps = getReps(str);
+
+    return permWithoutRepeats(reps[0], str.length);
   }
 
   return permAlone;

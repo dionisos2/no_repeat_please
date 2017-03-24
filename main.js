@@ -1,9 +1,10 @@
 
 window.onload = function () {
+  var permAlone;
   // tests();
   // benchmarks();
   createPermTab();
-  var permAlone = permAloneSuperPattern();
+
   var result = "";
   var resultSpan = document.getElementById('result');
 
@@ -29,7 +30,9 @@ window.onload = function () {
   // result += "<br/>";
   // result += permRegexp("aaaaaaxxx", /aax+ax+ax+ax+a/g);
 
-  permAlone("aaaaaaxxx");
-  // result += "aaaxxxx : " + permAlone("aaaxxxx").toString() + "</br>";
+  permAlone = permAloneSuperPattern();
+  result += "permAloneSuperPattern('aaaaaaxxxxxxxx') : " + permAlone("aaaaaabcdefghi").toString() + "</br>";
+  permAlone = permAlonePattern();
+  result += "permAlonePattern('aaaaaaxxxxxxxx') : " + permAlone("aaaaaabcdefghi").toString() + "</br>";
   resultSpan.innerHTML = result;
 };
