@@ -22,7 +22,7 @@ function createPermTab () {
     htmlTab += "<tr><th>"+i+"</th>";
     for (i2 = 1; i2 < dim; i2++) {
       if (i <= i2) {
-        htmlTab += "<td>p("+i.toString()+","+i2.toString()+")=" + p(i,i2) + " c=" + (fact(i2)-p(i,i2)).toString() +"</td>";
+        htmlTab += "<td>p("+i.toString()+","+i2.toString()+")=" + (p(i,i2)).toString() + " c=" + ((fact(i2)-p(i,i2))).toString() +"</td>";
       } else {
         htmlTab += "<td>0</td>";
       }
