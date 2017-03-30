@@ -12,6 +12,75 @@ function permAloneSuperPattern () {
     return Math.round(factorial(n)/common);
   }
 
+  function UltraPattern(groups, size) {
+    this.groups = groups;
+    this.size = size;
+    this.superPatterns = [];
+
+    this.start = function() {
+      for (var i=0; i<this.groups.length; i++) {
+        this.superPatterns.push(new SuperPattern([groups[i]], groups[i]));
+      }
+    };
+
+    this.next = function() {
+      var success = false;
+      var i = 0;
+      var newSuperPattern;
+      while ((!success) && (i < this.superPatterns.length - 1)) {
+        newSuperPattern = this.superPatterns[i].nextPattern(true);
+        if (newSuperPattern !== null) {
+          this.superPatterns[i] = newSuperPattern;
+          success = true;
+        } else {
+          i++;
+        }
+      }
+
+      if (!success) {
+        newSuperPattern = this.superPatterns[this.superPatterns.length-1].nextPattern();
+        if (newSuperPattern !== null) {
+          this.superPatterns[this.superPatterns.length-1] = newSuperPattern;
+        } else {
+          return false;
+        }
+      }
+
+      return true;
+    };
+
+    this.currentDescription = function() {
+      var str = "[";
+      var success = false;
+      var i = 0;
+      var sum = this.size;
+      while ((!success)&&(i < this.superPatterns.length)) {
+        sum -= this.superPatterns[i].size;
+        if(this.superPatterns[i].size !== this.superPatterns[i].pattern.length) {
+          str += "]";
+          str += "[" + this.superPatterns[i].pattern.toString() + "]";
+          success = true;
+        } else {
+          str += this.superPatterns[i].size + ", ";
+          i++;
+        }
+      }
+
+
+
+      str += "," + sum;
+
+      return str;
+    };
+
+    this.completeDescription = function() {
+      var str = "[";
+      for (var i=0; i<this.superPatterns.length; i++) {
+        str += this.superPatterns[i].size + ", ";
+      }
+      return str + "]" + ", " + this.size;
+    };
+  }
   function SuperPattern(pattern, size) {
     this.pattern = pattern;//a^5xaxx = [5,1]
     this.size = size;// a^6xxx=9
@@ -83,7 +152,10 @@ function permAloneSuperPattern () {
       return this.gaNumber() + this.xNumber();
     };
 
-    this.nextPattern = function () {
+    this.nextPattern = function (finalize) {
+      if (typeof finalize === 'undefined') {
+        finalize = false;
+      }
       var i = 0, i2 = 0;
       var newPattern = [];
       var aNumber = 0;
@@ -91,7 +163,7 @@ function permAloneSuperPattern () {
 
       for (i = this.pattern.length - 1; i >= 0; i--) {
         if (this.pattern[i] >= 2 ) {
-          if ((this.pattern[i] === 2)&&(i === 0)) {
+          if ((i === 0)&&(((this.pattern[i] === 2)&&(!finalize))||((this.pattern[i] === 1)&&(finalize)))) {
             return null;
           } else {
             max = this.pattern[i]-1;
@@ -162,8 +234,16 @@ function permAloneSuperPattern () {
   }
   function permAlone(str) {
     var reps = getReps(str);
+    var ultraPattern = new UltraPattern(reps, str.length);
+    ultraPattern.start();
+    var ok = true;
+    while(ok) {
+      console.log(ultraPattern.currentDescription());
+      ok = ultraPattern.next();
+    }
 
-    return permWithoutRepeats(reps[0], str.length);
+    return ultraPattern.completeDescription();
+    // return permWithoutRepeats(reps[0], str.length);
   }
 
   return permAlone;

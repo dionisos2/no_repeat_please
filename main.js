@@ -30,17 +30,11 @@ window.onload = function () {
   // result += "<br/>";
   // result += permRegexp("aaaaaaxxx", /aax+ax+ax+ax+a/g);
 
-  result += permRegexp("aaabbbcdef", /([^a]aa([^a].*bb|bb))|(^aa([^a].*bb|bb))/g);
-  result += "<br/>";
 
-  permAlone = permAlonePattern();
-  // permAlone = permAloneBruteForceOpti();
-  result += "permAlonePattern('aaabbbcdef') : " + permAlone("aaabbbcdef").toString() + "</br>";
-  result += "permAlonePattern('aaabcdefgh') : " + permAlone("aaabcdefgh").toString() + "</br>";
+  var permPattern = permAlonePattern();
+  var permSuperPattern = permAloneSuperPattern();
+  // result += (permPattern("aaaaaabcdefgh") === permSuperPattern("aaaaaabcdefgh")).toString() + "<br/>";
+  result += permSuperPattern("aaaabbbbccddddddefghi") + "<br/>";
 
-  permAlone = permAlonePattern();
-  result += "permAlonePattern('aaaaaabbbbbxxxxx') : " + permAlone("aaaaaabbbbbcdefg").toString() + "</br>";
-  result += "permAlonePattern('aaaaaaxxxxxxxxxx') : " + permAlone("aaaaaabcdefghijk").toString() + "</br>";
-  result += "permAlonePattern('aaaaaxxxxxxxxxxx') : " + permAlone("aaaaabcdefghijkl").toString() + "</br>";
   resultSpan.innerHTML = result;
 };
