@@ -8,22 +8,33 @@ function testPermAloneSimple(permAloneFunc) {
   return result;
 }
 
+function testPermAloneComplex(permAloneFunc) {
+  var result = true;
+  result = result && (permAloneFunc("aaaaaaacdefgh") == 3628800);
+  result = result && (permAloneFunc("aaaabbbcccde") == 46344960);
+  result = result && (permAloneFunc("aaabbcccddefg") == 1593043200);
+  return result;
+}
+
 
 function tests() {
   var result = "";
   var testsSpan = document.getElementById('tests');
   var permAlone;
-
-  permAlone = permAlonePattern();
-  result += "permAlonePattern simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
   permAlone = permAloneBruteForce();
   result += "permAloneBruteForce simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
   permAlone = permAloneBruteForce2();
   result += "permAloneBruteForce2 simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
   permAlone = permAloneBruteForceOpti();
   result += "permAloneBruteForceOpti simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
+  permAlone = permAlonePattern();
+  result += "permAlonePattern simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
   permAlone = permAloneSuperPattern();
   result += "permAloneSuperPattern simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
+  permAlone = permAlonePattern();
+  result += "permAlonePattern complex : " + testPermAloneComplex(permAlone).toString() + "</br>";
+  permAlone = permAloneSuperPattern();
+  result += "permAloneSuperPattern complex : " + testPermAloneComplex(permAlone).toString() + "</br>";
 
   testsSpan.innerHTML = result;
 }

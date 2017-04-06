@@ -2,7 +2,7 @@
 window.onload = function () {
   var permAlone;
   // tests();
-  // benchmarks();
+  benchmarks();
   createPermTab();
 
   var result = "";
@@ -29,12 +29,6 @@ window.onload = function () {
   // result += permRegexp("aaaaaaxxx", /aax+aax+ax+a/g);
   // result += "<br/>";
   // result += permRegexp("aaaaaaxxx", /aax+ax+ax+ax+a/g);
-
-
-  var permPattern = permAlonePattern();
-  var permSuperPattern = permAloneSuperPattern();
-  // result += (permPattern("aaaaaabcdefgh") === permSuperPattern("aaaaaabcdefgh")).toString() + "<br/>";
-  result += permSuperPattern("aaaabbbbccddddddefghi") + "<br/>";
 
   resultSpan.innerHTML = result;
 };

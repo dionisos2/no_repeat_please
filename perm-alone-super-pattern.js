@@ -12,6 +12,56 @@ function permAloneSuperPattern () {
     return Math.round(factorial(n)/common);
   }
 
+  function chooseConsecutively(groups) {
+    var result = 1;
+    var numberToChooseFrom = groups.reduce(function(acc, element){
+      return acc + element;
+    }, 0);
+
+    for (var i=0; i<groups.length; i++) {
+      result *= binomial(numberToChooseFrom, groups[i]) * factorial(groups[i]);
+      numberToChooseFrom -= groups[i];
+    }
+
+    return result;
+  }
+
+  function multipleFactorial(groups) {
+    var result = 1;
+    for (var i=0; i<groups.length;i++) {
+      result *= factorial(groups[i]);
+    }
+
+    return result;
+  }
+
+  function permWithoutRepeatsM(repeatingLetters, numberOfLetters) {
+    // console.log("permWithoutRepeatsM : [" + repeatingLetters.toString() + "], "+numberOfLetters);
+    if ((repeatingLetters.length === 1) && (repeatingLetters[0] === 1)) {
+      return factorial(numberOfLetters);
+    } else {
+      return factorial(numberOfLetters) - permWithRepeatsM(repeatingLetters, numberOfLetters);
+    }
+  }
+
+  function permWithRepeatsM(repeatingLetters, numberOfLetters) {
+    repeatingLetters = repeatingLetters.filter(function(element) {return element > 1;});
+    // console.log("permWithRepeatsM : [" + repeatingLetters.toString() + "], "+numberOfLetters);
+    var ultraPattern = new UltraPattern(repeatingLetters, numberOfLetters);
+    ultraPattern.start();
+    // console.log(ultraPattern.completeDescription());
+
+    var ok = true;
+    var sum = 0;
+    while(ok) {
+      // console.log(ultraPattern.currentDescription());
+      // console.log(ultraPattern.number());
+      sum += ultraPattern.number();
+      ok = ultraPattern.next();
+    }
+    return sum;
+  }
+
   function UltraPattern(groups, size) {
     this.groups = groups;
     this.size = size;
@@ -21,6 +71,32 @@ function permAloneSuperPattern () {
       for (var i=0; i<this.groups.length; i++) {
         this.superPatterns.push(new SuperPattern([groups[i]], groups[i]));
       }
+    };
+
+    this.number = function() {
+      var repeatingLetters = [];
+      var success = false;
+      var lastPattern = null;
+      var i = 0;
+
+      while ((!success)&&(i < this.superPatterns.length)) {
+        if(this.superPatterns[i].size !== this.superPatterns[i].pattern.length) {
+          lastPattern = this.superPatterns[i];
+          success = true;
+        } else {
+          repeatingLetters.push(this.superPatterns[i].size);
+          i++;
+        }
+      }
+
+      repeatingLetters.push(lastPattern.pattern.length);
+      var size = this.size - lastPattern.aNumber() + lastPattern.pattern.length;
+
+      var numberOfPlacements = permWithoutRepeatsM(repeatingLetters, size);
+      var numberByPlacement = 1;
+      numberByPlacement *= chooseConsecutively(lastPattern.pattern);
+      numberByPlacement /= multipleFactorial(lastPattern.getGroupedPattern());
+      return numberOfPlacements * numberByPlacement;
     };
 
     this.next = function() {
@@ -53,12 +129,13 @@ function permAloneSuperPattern () {
       var str = "[";
       var success = false;
       var i = 0;
-      var sum = this.size;
+      var size = this.size;
+
       while ((!success)&&(i < this.superPatterns.length)) {
-        sum -= this.superPatterns[i].size;
         if(this.superPatterns[i].size !== this.superPatterns[i].pattern.length) {
           str += "]";
           str += "[" + this.superPatterns[i].pattern.toString() + "]";
+          size += this.superPatterns[i].pattern.length - this.superPatterns[i].aNumber();
           success = true;
         } else {
           str += this.superPatterns[i].size + ", ";
@@ -68,7 +145,7 @@ function permAloneSuperPattern () {
 
 
 
-      str += "," + sum;
+      str += "," + size;
 
       return str;
     };
@@ -81,6 +158,7 @@ function permAloneSuperPattern () {
       return str + "]" + ", " + this.size;
     };
   }
+
   function SuperPattern(pattern, size) {
     this.pattern = pattern;//a^5xaxx = [5,1]
     this.size = size;// a^6xxx=9
@@ -234,16 +312,8 @@ function permAloneSuperPattern () {
   }
   function permAlone(str) {
     var reps = getReps(str);
-    var ultraPattern = new UltraPattern(reps, str.length);
-    ultraPattern.start();
-    var ok = true;
-    while(ok) {
-      console.log(ultraPattern.currentDescription());
-      ok = ultraPattern.next();
-    }
 
-    return ultraPattern.completeDescription();
-    // return permWithoutRepeats(reps[0], str.length);
+    return permWithoutRepeatsM(reps, str.length);
   }
 
   return permAlone;
