@@ -21,20 +21,26 @@ function tests() {
   var result = "";
   var testsSpan = document.getElementById('tests');
   var permAlone;
-  permAlone = permAloneBruteForce();
-  result += "permAloneBruteForce simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
-  permAlone = permAloneBruteForce2();
-  result += "permAloneBruteForce2 simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
-  permAlone = permAloneBruteForceOpti();
-  result += "permAloneBruteForceOpti simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
-  permAlone = permAlonePattern();
-  result += "permAlonePattern simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
+  // permAlone = permAloneBruteForce();
+  // result += "permAloneBruteForce simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
+  // permAlone = permAloneBruteForce2();
+  // result += "permAloneBruteForce2 simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
+  // permAlone = permAloneBruteForceOpti();
+  // result += "permAloneBruteForceOpti simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
+  // permAlone = permAlonePattern();
+  // result += "permAlonePattern simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
   permAlone = permAloneSuperPattern();
   result += "permAloneSuperPattern simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
-  permAlone = permAlonePattern();
-  result += "permAlonePattern complex : " + testPermAloneComplex(permAlone).toString() + "</br>";
+  permAlone = permAloneSuperPatternOpti();
+  result += "permAloneSuperPatternOpti simple : " + testPermAloneSimple(permAlone).toString() + "</br>";
+
+  // permAlone = permAlonePattern();
+  // result += "permAlonePattern complex : " + testPermAloneComplex(permAlone).toString() + "</br>";
   permAlone = permAloneSuperPattern();
   result += "permAloneSuperPattern complex : " + testPermAloneComplex(permAlone).toString() + "</br>";
+  permAlone = permAloneSuperPatternOpti();
+  result += "permAloneSuperPatternOpti complex : " + testPermAloneComplex(permAlone).toString() + "</br>";
+  result += "</br></br>";
 
   testsSpan.innerHTML = result;
 }
