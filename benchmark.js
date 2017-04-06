@@ -93,30 +93,30 @@ function benchmarks () {
   var benchmarksSpan = document.getElementById('benchmarks');
   var permAlone;
 
-  // permAlone = permAloneBruteForce();
-  // result += "benchmark permAloneBruteForce simple : " + parseFloat(benchmarkPermAloneSimple(permAlone)).toFixed(2) + "</br>";
-  // permAlone = permAloneBruteForce2();
-  // result += "benchmark permAloneBruteForce2 simple : " + parseFloat(benchmarkPermAloneSimple(permAlone)).toFixed(2) + "</br>";
-  // permAlone = permAloneBruteForceOpti();
-  // result += "benchmark permAloneBruteForceOpti simple : " + parseFloat(benchmarkPermAloneSimple(permAlone)).toFixed(2) + "</br>";
-  // permAlone = permAlonePattern();
-  // result += "benchmark permAlonePattern simple : " + parseFloat(benchmarkPermAloneSimple(permAlone)).toFixed(2) + "</br>";
+  permAlone = permAloneBruteForce();
+  result += "benchmark permAloneBruteForce simple : " + parseFloat(benchmarkPermAloneSimple(permAlone)).toFixed(2) + "</br>";
+  permAlone = permAloneBruteForce2();
+  result += "benchmark permAloneBruteForce2 simple : " + parseFloat(benchmarkPermAloneSimple(permAlone)).toFixed(2) + "</br>";
+  permAlone = permAloneBruteForceOpti();
+  result += "benchmark permAloneBruteForceOpti simple : " + parseFloat(benchmarkPermAloneSimple(permAlone)).toFixed(2) + "</br>";
+  permAlone = permAlonePattern();
+  result += "benchmark permAlonePattern simple : " + parseFloat(benchmarkPermAloneSimple(permAlone)).toFixed(2) + "</br>";
   permAlone = permAloneSuperPattern();
   result += "benchmark permAloneSuperPattern simple : " + parseFloat(benchmarkPermAloneSimple(permAlone)).toFixed(2) + "</br>";
   permAlone = permAloneSuperPatternOpti();
   result += "benchmark permAloneSuperPatternOpti simple : " + parseFloat(benchmarkPermAloneSimple(permAlone)).toFixed(2) + "</br>";
 
   result += "<br/>";
-  // permAlone = permAlonePattern();
-  // result += "benchmark permAlonePattern one group : " + parseFloat(benchmarkPermAloneOneGroup(permAlone)).toFixed(2) + "</br>";
+  permAlone = permAlonePattern();
+  result += "benchmark permAlonePattern one group : " + parseFloat(benchmarkPermAloneOneGroup(permAlone)).toFixed(2) + "</br>";
   permAlone = permAloneSuperPattern();
   result += "benchmark permAloneSuperPattern one group : " + parseFloat(benchmarkPermAloneOneGroup(permAlone)).toFixed(2) + "</br>";
   permAlone = permAloneSuperPatternOpti();
   result += "benchmark permAloneSuperPatternOpti one group : " + parseFloat(benchmarkPermAloneOneGroup(permAlone)).toFixed(2) + "</br>";
 
   result += "<br/>";
-  // permAlone = permAlonePattern();
-  // result += "benchmark permAlonePattern complex : " + parseFloat(benchmarkPermAloneComplex(permAlone)).toFixed(2) + "</br>";
+  permAlone = permAlonePattern();
+  result += "benchmark permAlonePattern complex : " + parseFloat(benchmarkPermAloneComplex(permAlone)).toFixed(2) + "</br>";
   permAlone = permAloneSuperPattern();
   result += "benchmark permAloneSuperPattern complex : " + parseFloat(benchmarkPermAloneComplex(permAlone)).toFixed(2) + "</br>";
   permAlone = permAloneSuperPatternOpti();
