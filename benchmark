@@ -1,0 +1,30 @@
+: 0 = 0.43
+ab : 2 = 0.57
+aabbcc : 6 = 3.45
+aaabbbcccddd : 12 = 6.10
+aaaabbbbccccddddeeee : 20 = 31.80
+aaaaabbbbbcccccdddddeeeeefffff : 30 = 34.13
+aaaaaabbbbbbccccccddddddeeeeeeffffffgggggg : 42 = 51.43
+aaaaaaabbbbbbbcccccccdddddddeeeeeeefffffffggggggghhhhhhh : 56 = 127.63
+aaaaaaaabbbbbbbbccccccccddddddddeeeeeeeeffffffffgggggggghhhhhhhhiiiiiiii : 72 = 432.23
+aaaaaaaaabbbbbbbbbcccccccccdddddddddeeeeeeeeefffffffffggggggggghhhhhhhhhiiiiiiiiijjjjjjjjj : 90 = 1183.59
+aaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkk : 110 = 3365.34
+aaaaaaaaaaabbbbbbbbbbbcccccccccccdddddddddddeeeeeeeeeeefffffffffffggggggggggghhhhhhhhhhhiiiiiiiiiiijjjjjjjjjjjkkkkkkkkkkklllllllllll : 132 = 8898.10
+aaaaaaaaaaaabbbbbbbbbbbbccccccccccccddddddddddddeeeeeeeeeeeeffffffffffffgggggggggggghhhhhhhhhhhhiiiiiiiiiiiijjjjjjjjjjjjkkkkkkkkkkkkllllllllllllmmmmmmmmmmmm : 156 = 22270.56
+aaaaaaaaaaaaabbbbbbbbbbbbbcccccccccccccdddddddddddddeeeeeeeeeeeeefffffffffffffggggggggggggghhhhhhhhhhhhhiiiiiiiiiiiiijjjjjjjjjjjjjkkkkkkkkkkkkklllllllllllllmmmmmmmmmmmmmnnnnnnnnnnnnn : 182 = 51133.26
+
+
+[0, 0.43]
+[2, 0.57]
+[6, 3.45]
+[12, 6.10]
+[20, 31.80]
+[30, 34.13]
+[42, 51.43]
+[56, 127.63]
+[72, 432.23]
+[90, 1183.59]
+[110, 3365.34]
+[132, 8898.10]
+[156, 22270.56]
+[182, 51133.26]

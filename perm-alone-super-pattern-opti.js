@@ -48,6 +48,9 @@ function permAloneSuperPatternOpti () {
   function permWithoutRepeatsM(repeatingLetters, numberOfLetters) {
     // console.log("permWithoutRepeatsM : [" + repeatingLetters.toString() + "], "+numberOfLetters);
 
+    if (numberOfLetters === 0) {
+      return 0;
+    }
     if ((repeatingLetters.length === 1) && (repeatingLetters[0] === 1)) {
       return factorial(numberOfLetters);
     } else {
@@ -140,6 +143,9 @@ function permAloneSuperPatternOpti () {
       var lastPattern = null;
       var i = 0;
 
+      if (this.superPatterns.length === 0) {
+        return 0;
+      }
       while ((!success)&&(i < this.superPatterns.length)) {
         if(this.superPatterns[i].size !== this.superPatterns[i].pattern.length) {
           lastPattern = this.superPatterns[i];
@@ -164,6 +170,7 @@ function permAloneSuperPatternOpti () {
       var success = false;
       var i = 0;
       var newSuperPattern;
+
       while ((!success) && (i < this.superPatterns.length - 1)) {
         newSuperPattern = this.superPatterns[i].nextPattern(true);
         if (newSuperPattern !== null) {
@@ -175,6 +182,9 @@ function permAloneSuperPatternOpti () {
       }
 
       if (!success) {
+        if (this.superPatterns.length === 0) {
+          return false;
+        }
         newSuperPattern = this.superPatterns[this.superPatterns.length-1].nextPattern();
         if (newSuperPattern !== null) {
           this.superPatterns[this.superPatterns.length-1] = newSuperPattern;
@@ -326,6 +336,9 @@ function permAloneSuperPatternOpti () {
   }
 
   function permWithoutRepeats(aNumber, totalNumber) {
+    if (numberOfLetters === 0) {
+      return 0;
+    }
     if (aNumber === 1) {
       return factorial(totalNumber);
     } else {
@@ -372,6 +385,19 @@ function permAloneSuperPatternOpti () {
     return reps;
   }
   function permAlone(str) {
+    cnt = 0;
+    s = [[str]];
+
+    // for(var i = 0;i<100;i++) {
+    //   s.push([100]);
+    // }
+
+    // p = new UltraPattern(s, str);
+    // p.start();
+    // while(p.next()) {
+    //   cnt++;
+    // }
+    // return cnt;
     var reps = getReps(str);
 
     reps.sort(function(a,b) {
