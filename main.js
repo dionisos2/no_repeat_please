@@ -1,50 +1,76 @@
+function testSimpleFor(permAloneFunc, name) {
+  var result = true;
+  var testsSpan = document.getElementById('tests');
+  var permAlone;
+
+  result = result && (permAloneFunc("aaabcdef") == 14400);
+  result = result && (permAloneFunc("aaaabcde") == 2880);
+  result = result && (permAloneFunc("aaabbbcd") == 6624);
+  result = result && (permAloneFunc("aaabbcd") == 1152);
+  result = result && (permAloneFunc("aaabbcce") == 9216);
+
+  testsSpan.innerHTML += "Test simple for " + name + " : " + result.toString() + "</br>";
+}
+
+function testComplexFor(permAloneFunc, name) {
+  var result = true;
+  var testsSpan = document.getElementById('tests');
+
+  result = result && (permAloneFunc("aaaaaaacdefgh") == 3628800);
+  result = result && (permAloneFunc("aaaabbbcccde") == 46344960);
+  result = result && (permAloneFunc("aaabbcccddefg") == 1593043200);
+
+  testsSpan.innerHTML += "Test complex for " + name + " : " + result.toString() + "</br>";
+}
+
+function benchmarkFor (permAloneFunc, input, name) {
+  var benchmarksSpan = document.getElementById('benchmarks');
+  var start = performance.now();
+
+  permAloneFunc(input);
+
+  var duration = performance.now() - start;
+
+  benchmarksSpan.innerHTML += "Benchmark for " + name + " : " + duration.toFixed(2).toString() + "</br>";
+}
+
+
+function benchmarks (solutions, input) {
+  var benchmarksSpan = document.getElementById('benchmarks');
+  benchmarksSpan.innerHTML += '</br>------------- "' + input + '" -------------</br></br>';
+
+  for (var name in solutions) {
+    benchmarkFor(solutions[name], input, name);
+  }
+}
+
+function tests(solutions, testFunction) {
+  for (var name in solutions) {
+    testFunction(solutions[name], name);
+  }
+}
 
 window.onload = function () {
   var permAlone;
-  // tests();
-  // complexity();
-  benchmarks();
-  // createPermTab();
+  var slowSolutions = {
+    "permAloneBruteForce" : permAloneBruteForce(),
+    "permAloneBruteForceOpti" : permAloneBruteForceOpti(),
+    "permAlonePattern" : permAlonePattern(),
+    "permAloneAlbinutte" : permAloneAlbinutte(),
+    "permAloneProgheal" : permAloneProgheal(),
+  };
 
-  var result = "";
-  var resultSpan = document.getElementById('result');
+  var fastSolutions = {
+    "permAloneSuperPatternOpti" : permAloneSuperPatternOpti(),
+    "permAloneMesterum" : permAloneMesterum(),
+    "permAloneDavidF25" : permAloneDavidF25()
+  };
 
-  // var input = "aaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeffffffffffgggggggggghhhhhhhhhhiiiiiiiiiijjjjjjjjjjkkkkkkkkkk";
-  // permAlone = permAloneDavidF25();
-  // result = "<br/>";
-  // result += "permAloneDavidF25('" + input + "') : </br>" + myToFixed(permAlone(input)) + "</br>";
+  tests(slowSolutions, testSimpleFor);
+  tests(fastSolutions, testSimpleFor);
+  tests(fastSolutions, testComplexFor);
 
-  // permAlone1 = permAloneSuperPatternOpti();
-  // permAlone2 = permAloneMesterum();
-
-  // for(i=0;i<30;i++) {
-  //   result += i.toString()+ ":" + permAlone(i).toString() + "<br/>";
-  // }
-
-  // result += "<br/>";
-  // result += "permAloneSuperPatternOpti('" + input + "') : </br>" + myToFixed(permAlone(input)) + "</br>";
-
-  // permAlone = permAloneAlbinutte();
-  // result += "<br/>";
-  // result += "permAloneAlbinutte('" + input + "') : </br>" + myToFixed(permAlone(input)) + "</br>";
-
-  // permAlone = permAloneSuperPatternOpti();
-  // result += "<br/>";
-  // result += "permAloneSuperPatternOpti('aaaaaaaaabbbbbbccccddeeeefffggghhhiiiiijjkklllmmopqr') : </br>" + myToFixed(permAlone("aaaaaaaaabbbbbbccccddeeeefffggghhhiiiiijjkklllmmopqr")) + "</br>";
-  // result += "permAloneSuperPatternOpti('aaaabb') : " + myToFixed(permAlone("aaaabb")) + "</br>";
-  // result += "permAloneSuperPatternOpti('a') : " + myToFixed(permAlone("a")) + "</br>";
-  // result += "permAloneSuperPatternOpti('aabbcd') : " + myToFixed(permAlone("aabbcd")) + "</br>";
-  // result += "permAloneSuperPatternOpti('aaabb') : " + myToFixed(permAlone("aaabb")) + "</br>";
-  // result += "permAloneSuperPatternOpti('') : " + myToFixed(permAlone("")) + "</br>";
-  // result += "permAloneSuperPatternOpti('abcde') : " + myToFixed(permAlone("abcde")) + "</br>";
-  // result += "permAloneSuperPatternOpti('aaabbbccc') : " + myToFixed(permAlone("aaabbbccc")) + "</br>";
-  // result += "permAloneSuperPatternOpti('aaabbcdefg') : " + myToFixed(permAlone("aaabbcdefg")) + "</br>";
-  // result += "permAloneSuperPatternOpti('aaaaabbbbcdef') : " + myToFixed(permAlone("aaaaabbbbcdef")) + "</br>";
-  // result += "permAloneSuperPatternOpti('aaaabbbbbcccddee') : " + myToFixed(permAlone("aaaabbbbbcccddee")) + "</br>";
-  // result += "permAloneSuperPatternOpti('aaaabbbbbccccceeeff') : " + myToFixed(permAlone("aaaabbbbbccccceeeff")) + "</br>";
-  // result += "permAloneSuperPatternOpti('aaaaabbbbbbccccddeeeefg') : " + myToFixed(permAlone("aaaaabbbbbbccccddeeeefg")) + "</br>";
-  // result += "permAloneSuperPatternOpti('aaaaabbbbbbccccddeeeefffggghhhijkl') : " + myToFixed(permAlone("aaaaabbbbbbccccddeeeefffggghhhijkl")) + "</br>";
-  // result += "permAloneSuperPatternOpti('auienrstauirnesttanuridcnrlanruaseticeoancauysrtbndnsrautievxfbpwrnsctuirstfldw') : " + myToFixed(permAlone("auienrstauirnesttanuridcnrlanruaseticeoancauysrtbndnsrautievxfbpwrnsctuirstfldw")) + "</br>";
-
-  resultSpan.innerHTML = result.toString();
+  benchmarks(slowSolutions, "aaaeei");
+  benchmarks(fastSolutions, "aaabbccdefgh");
+  benchmarks(fastSolutions, "aaaaaaaaabbbbbbbbbbccccccccddddeeeeeefffgggghhhhij");
 };
