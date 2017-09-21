@@ -1,5 +1,0 @@
-- [permAloneBruteForce](https://github.com/dionisos2/no_repeat_please/blob/master/perm-alone-brute-force.js) : Recursively generate all the possibilities, and filter the good ones.
-- [permAloneBruteForceOpti](https://github.com/dionisos2/no_repeat_please/blob/master/perm-alone-brute-force-opti.js) : Same things, but don’t generate the bad possibilities.
-- [permAlonePattern](https://github.com/dionisos2/no_repeat_please/blob/master/perm-alone-pattern.js) : Use pattern representations to avoid to generate all possibilities.
-- [permAloneSuperPattern](https://github.com/dionisos2/no_repeat_please/blob/master/perm-alone-super-pattern.js) : It is much quicker than permAlonePattern, but complex.
-- [permAloneSuperPatternOpti](https://github.com/dionisos2/no_repeat_please/blob/master/perm-alone-super-pattern-opti.js) : Same things, but use a cache system to avoid to recalculate the same things many times.

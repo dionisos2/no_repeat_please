@@ -72,5 +72,6 @@ window.onload = function () {
 
   benchmarks(slowSolutions, "aaaeei");
   benchmarks(fastSolutions, "aaabbccdefgh");
+  benchmarks(fastSolutions, "aaabbbcccddeeefgh");
   benchmarks(fastSolutions, "aaaaaaaaabbbbbbbbbbccccccccddddeeeeeefffgggghhhhij");
 };
